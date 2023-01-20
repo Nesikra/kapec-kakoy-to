@@ -1,52 +1,58 @@
-# Prerequisites
-*.d
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
+namespace WinFormsApp1
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
 
-# Linker output
-*.ilk
-*.map
-*.exp
+        
 
-# Precompiled Headers
-*.gch
-*.pch
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            int X0 = 0, k = 0, Y0 = 0;
+            
 
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
+            int ScreenX (double x)
+            {
+                return Convert.ToInt32(X0 + k * x);
+            }
+            int ScreenY (double y)
+            {
+                return Convert.ToInt32(Y0 - k * y);
+            }
 
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
+            int[] x1 = new int[30];
+            int[] x2 = new int[30];
+            int[] y1 = new int[30];
+            int[] y2 = new int[30];
 
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
+            for (int i = 0; i < 30; i ++)
+            {
+                x1[i] = ScreenX(i);
+                x2[i] = ScreenX(0);
+                y1[i] = ScreenX(0);
+                y2[i] = ScreenX(i);
+            }
 
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
-
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
+            chart1.Series.Add("X");
+            chart1.Series[0].Points.DataBindXY(x1, y1);
+            chart1.Series.Add("Y");
+            chart1.Series[1].Points.DataBind(x2, y2);
+            chart1.Series[0].ChartType = System.Windows.Forms.DataVisuallization.Charting.SeriesChartType.Line;
+            chart1.Series[1].ChartType = System.Windows.Forms.DataVisuallization.Charting.SeriesChartType.Line;
+        }
+        
+    }
+}
